@@ -4,7 +4,7 @@ import data as dt
 def add_favorite():
     """ Añade un nuevo título favorito al json, favs.json """
     while True:
-        js = dt.readMyJson()
+        js = dt.JsonMethods.readMyJson()
         title = str(input("Ingresa titulo: "))
         url = str(input("Ingresa URL: "))
         comment = str(input("Ingresa comentario: "))
@@ -22,7 +22,7 @@ def delete_favorite():
     """ Elimina un favorito del json, favs.json """
     deleted = True
     while deleted:
-        js = dt.readMyJson()
+        js = dt.JsonMethods.readMyJson()
         print("¡Elige el titulo que deseas eliminar!")
         for z in range(len(js['favorites'])):
             print(f"[ {z + 1} ]. {js['favorites'][z]['title']}")
@@ -44,7 +44,7 @@ def delete_favorite():
 def update_favorite():
     """ Actualiza un favorito del json, favs.json, la cual pide
     al usuario el nuevo título, nuevo url y nuevo comentario"""
-    js = dt.readMyJson()
+    js = dt.JsonMethods.readMyJson()
     while True:
         print("Ingresa titulo del favorito a eliminar: ")
         for z in range(len(js['favorites'])):
@@ -73,7 +73,7 @@ def show_all_favorites():
     """ Imprime por consola, todos los títulos
     favoritos existentes dentro de favs.json """
 
-    js = dt.readMyJson()
+    js = dt.JsonMethods.readMyJson()
 
     def printWith(string: str, idx: int):
         """ Función interna, se encarga de imprimir una linea
