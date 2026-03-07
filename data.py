@@ -1,13 +1,5 @@
 import json
-import os
 from typing import Any
-
-def if_empty():
-    """ Valida si el archivo .json esta lleno, si no, entonces
-    lo llena con esta estructura mínima: {"favorites": []} - [En proceso de implementación] """
-    with open("favs.json", "w", encoding="utf-8") as file:
-        if os.path.getsize("favs.json") == 0:
-            json.dump({"favorites": []}, file, indent=4, ensure_ascii=False)
 
 
 def readMyJson() -> dict:

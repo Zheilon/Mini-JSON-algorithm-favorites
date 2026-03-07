@@ -1,7 +1,7 @@
 import options as opt
 
 def main():
-
+    """ Función principal que desarrolla el programa """
     while True:
         print("\n--------- Tus Favoritos ---------\n")
 
