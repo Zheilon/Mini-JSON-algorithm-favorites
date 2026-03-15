@@ -1,8 +1,14 @@
 import json
+import os
 import data as dt
+from rich.console import Console
+from rich.table import Table
 
 def add_favorite():
-    """ Añade un nuevo título favorito al json, favs.json """
+    """
+    Añade un nuevo título favorito al json, favs.json
+    """
+    os.system("cls")
     while True:
         js = dt.JsonMethods.readMyJson()
         title = str(input("Ingresa titulo: "))
@@ -19,7 +25,10 @@ def add_favorite():
 
 
 def delete_favorite():
-    """ Elimina un favorito del json, favs.json """
+    """
+    Elimina un favorito del json, favs.json
+    """
+    os.system("cls")
     deleted = True
     while deleted:
         js = dt.JsonMethods.readMyJson()
@@ -42,8 +51,11 @@ def delete_favorite():
 
 
 def update_favorite():
-    """ Actualiza un favorito del json, favs.json, la cual pide
-    al usuario el nuevo título, nuevo url y nuevo comentario"""
+    """
+    Actualiza un favorito del json, favs.json, la cual pide
+    al usuario el nuevo título, nuevo url y nuevo comentario
+    """
+    os.system("cls")
     js = dt.JsonMethods.readMyJson()
     while True:
         print("Ingresa titulo del favorito a eliminar: ")
@@ -69,19 +81,23 @@ def update_favorite():
             print(f"¡No existe el título: {title}!\n")
 
 
-def show_all_favorites():
-    """ Imprime por consola, todos los títulos
-    favoritos existentes dentro de favs.json """
-
+def show_all_favorites_v1():
+    """
+    Imprime por consola, todos los títulos
+    favoritos existentes dentro de favs.json
+    """
+    os.system("cls")
     js = dt.JsonMethods.readMyJson()
 
     def printWith(string: str, idx: int):
-        """ Función interna, se encarga de imprimir una linea
+        """
+        Función interna, se encarga de imprimir una linea
         después del favorito mostrado en el (for), añadiendo
         al final el indice de este título, mediante el formato
         utilizando en la variable, last_string.
         :param string: Se refiere al título, que aparece cuando se muestra la lista
-        :param idx: Index del (for) donde se encuentra la función """
+        :param idx: Index del (for) donde se encuentra la función
+        """
 
         last_string = f"> F [ {idx} ]\n"
         new_len = len(string) - len(last_string)
@@ -99,3 +115,30 @@ def show_all_favorites():
               f"URL: {js['favorites'][z]['url']}\n"
               f"Comentario: {js['favorites'][z]['comment']}")
         printWith(init_message, idx=z + 1)
+
+
+def show_all_fav_v2_rich():
+    os.system("cls")
+    data = dt.JsonMethods.readMyJson()
+    console = Console(
+        width=None,
+        highlight=True,
+        soft_wrap=True,
+        emoji=True
+    )
+
+    table = Table(
+        title="Favoritos",
+        border_style="bright_blue",
+        header_style="bold red",
+        row_styles=["none", "dim"],
+    )
+
+    table.add_column("Títulos", style="cyan")
+    table.add_column("URL", style="black")
+    table.add_column("Comentario", style="black", overflow="fold")
+
+    for z in data['favorites']:
+        table.add_row(z['title'], z['url'], z['comment'])
+
+    console.print(table)
