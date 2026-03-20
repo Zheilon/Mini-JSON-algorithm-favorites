@@ -1,4 +1,5 @@
 import options as opt
+import show_menu as sm
 
 def main():
     """
@@ -8,14 +9,7 @@ def main():
     una tabla mucho más elegante y personalizada.
     """
     while True:
-        print("\n--------- Tus Favoritos ---------\n")
-
-        options = ["Añadir", "Eliminar", "Modificar", "Ver lista", "Salir\n"]
-        print(" * Opciones * ")
-
-        for z in range(len(options)):
-            print(f"[ {z + 1} ]. {options[z]}")
-        option = int(input("¡Elige!: "))
+        option = sm.genMenu()
 
         if option == 1:
             opt.add_favorite()
